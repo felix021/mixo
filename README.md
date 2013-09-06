@@ -1,7 +1,7 @@
 mixo
 ====
 
-A secured socks5 proxy over the Greate Fucking Wall.
+A secured socks5 proxy over the Great Fucking Wall.
 
 一点废话
 --------
