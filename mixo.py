@@ -88,7 +88,7 @@ class XSocket(gevent.socket.socket):
         data = gevent.socket.socket.recv(self, length, *args)
         if config.debug: print 'Received:', dumps(data)
         if self.secure:
-            data = encrypt(data, self.recv_idx)
+            data = decrypt(data, self.recv_idx)
             self.recv_idx = (self.recv_idx + len(data)) % 1024
             if config.debug: print 'Decrypted:', dumps(data), '--', data
         return data
@@ -96,7 +96,7 @@ class XSocket(gevent.socket.socket):
     def sendall(self, data, flags = 0):
         if config.debug: print 'Send:', dumps(data), '--', data
         if self.secure:
-            data = decrypt(data, self.send_idx)
+            data = encrypt(data, self.send_idx)
             self.send_idx = (self.send_idx + len(data)) % 1024
             if config.debug: print 'Encrypted:', dumps(data)
         return gevent.socket.socket.sendall(self, data, flags)
